@@ -42,7 +42,7 @@ public class Robot : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-		startDrainingHealth();
+		
     }
 
     // Update is called once per frame

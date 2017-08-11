@@ -5,12 +5,13 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 	// The current game state
-	private PossibleGameStates currentGameState = PossibleGameStates.Active;
+	private PossibleGameStates currentGameState = PossibleGameStates.Starting;
 
 	// EXTERNAL REFERENCES
 	private Robot robotRef;
 
 	// HUD REFERENCES
+	private StartHUDGroup startHUD;
 	private PauseHUDGroup pauseHUD;
 	private GameOverHUDGroup gameOverHUD;
 	private MainHUDGroup mainHUD;
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
 	/// </summary>
 	void Awake()
 	{
+		startHUD = FindObjectOfType<StartHUDGroup>();
 		pauseHUD = FindObjectOfType<PauseHUDGroup>();
 		gameOverHUD = FindObjectOfType<GameOverHUDGroup>();
 		mainHUD = FindObjectOfType<MainHUDGroup>();
@@ -98,6 +100,13 @@ public class GameManager : MonoBehaviour
 	// Start the game
 	public void startGame()
 	{
-
+		// Set the current game state to be Active
+		// Hide the starting HUD
+		// Show the main game HUD
+		// Have the robot start losing health
+		setCurrentGameState(PossibleGameStates.Active);
+		startHUD.hideHUD();
+		mainHUD.showHUD();
+		robotRef.startDrainingHealth();
 	}
 }

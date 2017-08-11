@@ -80,6 +80,9 @@ public class PlayerCharacter : MonoBehaviour
         // Control pausing
         controlPausing();
 
+        // Control game starting
+        controlGameStarting();
+
         if (Input.GetKeyDown(KeyCode.T))
         {
             if (Cursor.visible)
@@ -96,8 +99,8 @@ public class PlayerCharacter : MonoBehaviour
     // Control look
     private void controlLook()
     {
-        // If the current game state is active
-        if (GameStateCheckers.isGameActive(gameManagerRef.getCurrentGameState()))
+        // If the current game state is active or starting
+        if (GameStateCheckers.isGameActive(gameManagerRef.getCurrentGameState()) || GameStateCheckers.isGameStarting(gameManagerRef.getCurrentGameState()))
         {
             // Add to the rotation x and y values
             rotationX += Input.GetAxis("Mouse X") * lookSensitivity * Time.deltaTime;
@@ -180,6 +183,20 @@ public class PlayerCharacter : MonoBehaviour
 
     }
 
+    // Control game starting
+    private void controlGameStarting()
+    {
+        // If the game is starting
+        if (GameStateCheckers.isGameStarting(gameManagerRef.getCurrentGameState()))
+        {
+            // If the user presses the escape key
+            // Start the game
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                gameManagerRef.startGame();
+            }
+        }
+    }
 
     // Increase the current score
     public void increaseCurrentScore(int increaseAmount)
