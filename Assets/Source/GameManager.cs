@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 	private PossibleGameStates currentGameState = PossibleGameStates.Starting;
 
 	// EXTERNAL REFERENCES
+	private PlayerCharacter playerRef;
 	private Robot robotRef;
 
 	// HUD REFERENCES
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour
 		gameOverHUD = FindObjectOfType<GameOverHUDGroup>();
 		mainHUD = FindObjectOfType<MainHUDGroup>();
 
+		playerRef = FindObjectOfType<PlayerCharacter>();
 		robotRef = FindObjectOfType<Robot>();
 	}
 
@@ -84,7 +86,7 @@ public class GameManager : MonoBehaviour
 		gameOverHUD.showHUD();
 
 		// Set the new high score
-
+		playerRef.setNewHighScore();
 	}
 
 	// Resume the game

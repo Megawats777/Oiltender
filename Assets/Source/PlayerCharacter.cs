@@ -65,7 +65,8 @@ public class PlayerCharacter : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        
+        // Set the high score
+        setHighScore(SaveGameManager.getSavedHighScore());
     }
 
     // Update is called once per frame
@@ -92,6 +93,15 @@ public class PlayerCharacter : MonoBehaviour
             else
             {
                 MouseCursorVisiblityManager.showMouseCursor();
+            }
+        }
+
+        if (Application.isEditor)
+        {
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                SaveGameManager.setSavedHighScore(0);
+                print("Restart game to see reset high scores");
             }
         }
     }
@@ -208,5 +218,16 @@ public class PlayerCharacter : MonoBehaviour
     public void decreaseCurrentScore(int decreaseAmount)
     {
         setCurrentScore(getCurrentScore() - decreaseAmount);
+    }
+
+    // Set the new high score
+    public void setNewHighScore()
+    {
+        // If the current score is greater than the high score
+        // Save the current score as the high score
+        if (getCurrentScore() > getHighScore())
+        {
+            SaveGameManager.setSavedHighScore(getCurrentScore());
+        }
     }
 }
