@@ -12,7 +12,7 @@ public class MainHUDGroup : GameHUDBase
     /// </summary>
     void Start()
     {
-
+        showHUD();
     }
 
     /// <summary>
@@ -25,12 +25,12 @@ public class MainHUDGroup : GameHUDBase
 
     public override void hideHUD()
     {
-        throw new NotImplementedException();
+        hudContentRoot.SetActive(false);
     }
 
     public override void showHUD()
     {
-        throw new NotImplementedException();
+        hudContentRoot.SetActive(true);
     }
 
     public override void updateHUDContent()
