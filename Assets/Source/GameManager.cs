@@ -82,6 +82,9 @@ public class GameManager : MonoBehaviour
 		robotRef.stopDrainingHealth();
 		mainHUD.hideHUD();
 		gameOverHUD.showHUD();
+
+		// Set the new high score
+		
 	}
 
 	// Resume the game

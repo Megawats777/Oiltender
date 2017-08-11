@@ -366,7 +366,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1321670260837978
 GameObject:
   m_ObjectHideFlags: 1
@@ -1154,7 +1154,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114340998280578144}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: resumeGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114239461793643400
@@ -1616,6 +1627,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hudContentRoot: {fileID: 1422652008232826}
+  currentScoreText: {fileID: 114276830393382066}
+  highScoreText: {fileID: 114768787698196638}
+  robotHealthText: {fileID: 114247939836348120}
+  blueDiamondOrderText: {fileID: 114872728935813098}
+  magicGrapeOrderText: {fileID: 114007052431773818}
+  redSugarOrderText: {fileID: 114713509196557704}
 --- !u!114 &114588933090778744
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2223,6 +2240,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hudContentRoot: {fileID: 1787036642687434}
+  currentScoreText: {fileID: 114275987147559626}
+  highScoreText: {fileID: 114864808689159892}
+  newHighScoreNotifyText: {fileID: 1877976515718072}
 --- !u!114 &114896097926424180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2295,6 +2315,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hudContentRoot: {fileID: 1755055354618766}
+  currentScoreText: {fileID: 114820887991390544}
+  highScoreText: {fileID: 114981164340637964}
 --- !u!114 &114938919675729912
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2801,7 +2823,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0

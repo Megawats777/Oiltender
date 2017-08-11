@@ -16,7 +16,7 @@ public class PlayerCharacter : MonoBehaviour
 
     // SCORE PROPERTIES
     private int currentScore = 0;
-    private int highScore = 0;
+    private int highScore = 10;
 
 
 

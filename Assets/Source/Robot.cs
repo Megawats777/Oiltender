@@ -23,7 +23,6 @@ public class Robot : MonoBehaviour
 	public void setHealth(int health)
 	{
 		this.health = health;
-		print("Health:" + getHealth());
 	}
 	
 
