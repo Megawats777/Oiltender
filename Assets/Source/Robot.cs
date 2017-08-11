@@ -9,6 +9,10 @@ public class Robot : MonoBehaviour
 	private int health = 10;
 
 
+	// The default delay before the robot starts losing health
+	[SerializeField]
+	private float defaultHealthLossDelay = 1.0f;
+
 	// EXTERNAL REFERENCES
 	private GameManager gameManagerRef;
 
@@ -25,6 +29,17 @@ public class Robot : MonoBehaviour
 		this.health = health;
 	}
 	
+
+	// Get and set the default health loss delay
+	public float getDefaultHealthLossDelay()
+	{
+		return defaultHealthLossDelay;
+	}
+
+	public void setDefaultHealthLossDelay(float defaultHealthLossDelay)
+	{
+		this.defaultHealthLossDelay = defaultHealthLossDelay;
+	}
 
 	/*--END OF GETTERS AND SETTERS--*/
 
@@ -66,9 +81,9 @@ public class Robot : MonoBehaviour
 	}
 
 	// Start draining the health of the robot
-	public void startDrainingHealth()
+	public void startDrainingHealth(float initialDelay)
 	{
-		InvokeRepeating("drainHealth", 0.0f, 1.0f);
+		InvokeRepeating("drainHealth", initialDelay, 1.0f);
 	}
 
 	// Stop draining the health of the robot

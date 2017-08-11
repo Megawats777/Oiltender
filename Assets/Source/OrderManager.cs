@@ -30,6 +30,13 @@ public class OrderManager : MonoBehaviour
 	[SerializeField]
 	private int orderHealthValue = 10;
 
+    // Is a new order being generated
+    private bool isNewOrderBeingGenerated = false;
+
+    // The delay between orders
+    [SerializeField]
+    private float delayBetweenOrders = 0.2f;
+
     // EXTERNAL REFERENCES
     private PlayerCharacter playerRef;
 	private Robot robotRef;
@@ -105,6 +112,16 @@ public class OrderManager : MonoBehaviour
     }
 
 
+    // Get and set if a new order is being generated
+    public bool getIsNewOrderBeingGenerated()
+    {
+        return isNewOrderBeingGenerated;
+    }
+    
+    public void setIsNewOrderBeingGenerated(bool isNewOrderBeingGenerated)
+    {
+        this.isNewOrderBeingGenerated = isNewOrderBeingGenerated;
+    }
 
     /*--END OF GETTERS AND SETTERS--*/
 
@@ -164,10 +181,10 @@ public class OrderManager : MonoBehaviour
         {
             // Add to the player's score
 			// Increase the health of the robot
-            // Generate a new order
+            // Generate a new order with a delay
             playerRef.increaseCurrentScore(orderScoreValue);
 			robotRef.increaseHealth(orderHealthValue);
-            generateOrder();
+            StartCoroutine(generateOrderWithDelay());
             //print("Order Successful");
         }
 
@@ -175,12 +192,32 @@ public class OrderManager : MonoBehaviour
         else
         {
             // Decrease the player's score
-            // Generate a new order
+            // Generate a new order with a delay
             playerRef.decreaseCurrentScore(orderScoreValue);
-            generateOrder();
+            StartCoroutine(generateOrderWithDelay());
             //print("Order Failed");
         }
     }
+
+    // Generate a new order with a delay
+    public IEnumerator generateOrderWithDelay()
+    {
+        setIsNewOrderBeingGenerated(true);
+
+        // Stop the robot from losing health
+        robotRef.stopDrainingHealth();
+
+        yield return new WaitForSeconds(delayBetweenOrders);
+
+        setIsNewOrderBeingGenerated(false);
+
+        // Have the robot start losing health again
+        robotRef.startDrainingHealth(delayBetweenOrders);
+
+        // Generate a new order
+        generateOrder();
+    }
+
 
     // Generate order
     public void generateOrder()

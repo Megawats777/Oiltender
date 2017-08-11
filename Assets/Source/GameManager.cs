@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
 		gameOverHUD.showHUD();
 
 		// Set the new high score
-		
+
 	}
 
 	// Resume the game
@@ -110,6 +110,6 @@ public class GameManager : MonoBehaviour
 		setCurrentGameState(PossibleGameStates.Active);
 		startHUD.hideHUD();
 		mainHUD.showHUD();
-		robotRef.startDrainingHealth();
+		robotRef.startDrainingHealth(robotRef.getDefaultHealthLossDelay());
 	}
 }
