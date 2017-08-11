@@ -26,7 +26,7 @@ public class GameOverHUDGroup : GameHUDBase
     public override void showHUD()
     {
         hudContentRoot.SetActive(true);
-		MouseCursorVisiblityManager.hideMouseCursor();
+		MouseCursorVisiblityManager.showMouseCursor();
     }
 
     public override void updateHUDContent()

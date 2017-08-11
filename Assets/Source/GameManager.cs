@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
 	// The current game state
 	private PossibleGameStates currentGameState = PossibleGameStates.Active;
 
-
+	// EXTERNAL REFERENCES
+	private Robot robotRef;
 
 	// HUD REFERENCES
 	private PauseHUDGroup pauseHUD;
@@ -38,13 +39,15 @@ public class GameManager : MonoBehaviour
 		pauseHUD = FindObjectOfType<PauseHUDGroup>();
 		gameOverHUD = FindObjectOfType<GameOverHUDGroup>();
 		mainHUD = FindObjectOfType<MainHUDGroup>();
+
+		robotRef = FindObjectOfType<Robot>();
 	}
 
 
     // Use this for initialization
     void Start()
     {
-		pauseGame();
+		
     }
 
     // Update is called once per frame
@@ -69,13 +72,27 @@ public class GameManager : MonoBehaviour
 	// End the game
 	public void endGame()
 	{
-
+		// Set the current game state to be Finished
+		// Stop the robot from losing health
+		// Hide the main game HUD
+		// Show the game over HUD
+		setCurrentGameState(PossibleGameStates.Finished);
+		robotRef.stopDrainingHealth();
+		mainHUD.hideHUD();
+		gameOverHUD.showHUD();
 	}
 
-	// Restart the game
-	public void restartGame()
+	// Resume the game
+	public void resumeGame()
 	{
-
+		// Set the current game state to be Active
+		// Set the time scale to 1.0
+		// Hide the pause HUD
+		// Show the main game HUD
+		setCurrentGameState(PossibleGameStates.Active);
+		Time.timeScale = 1.0f;
+		pauseHUD.hideHUD();
+		mainHUD.showHUD();
 	}
 
 	// Start the game

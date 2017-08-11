@@ -77,6 +77,9 @@ public class PlayerCharacter : MonoBehaviour
         // Control object interaction
         controlObjectInteraction();
 
+        // Control pausing
+        controlPausing();
+
         if (Input.GetKeyDown(KeyCode.T))
         {
             if (Cursor.visible)
@@ -149,6 +152,34 @@ public class PlayerCharacter : MonoBehaviour
             }
         }
     }
+
+    // Control pausing
+    private void controlPausing()
+    {
+        // If the game is active
+        if (GameStateCheckers.isGameActive(gameManagerRef.getCurrentGameState()))
+        {
+            // If the user presses the escape key
+            // Pause the game
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                gameManagerRef.pauseGame();
+            }
+        }
+            
+        // If the game is paused
+        else if (GameStateCheckers.isGamePaused(gameManagerRef.getCurrentGameState()))
+        {
+            // If the user presses the escape key
+            // Resume the game
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                gameManagerRef.resumeGame();
+            }
+        }
+
+    }
+
 
     // Increase the current score
     public void increaseCurrentScore(int increaseAmount)

@@ -6,8 +6,11 @@ public class Robot : MonoBehaviour
 {
 
 	// The health of the robot
-	private int health = 100;
+	private int health = 10;
 
+
+	// EXTERNAL REFERENCES
+	private GameManager gameManagerRef;
 
 	/*--GETTERS AND SETTERS--*/
 
@@ -25,6 +28,15 @@ public class Robot : MonoBehaviour
 	
 
 	/*--END OF GETTERS AND SETTERS--*/
+
+
+	/// <summary>
+	/// Awake is called when the script instance is being loaded.
+	/// </summary>
+	void Awake()
+	{
+		gameManagerRef = FindObjectOfType<GameManager>();
+	}
 
 
     // Use this for initialization
@@ -46,9 +58,11 @@ public class Robot : MonoBehaviour
 
 		// If the health remaining equals 0
 		// Stop draining health
+		// End the game
 		if (getHealth() == 0)
 		{
 			stopDrainingHealth();
+			gameManagerRef.endGame();
 		}
 	}
 

@@ -12,7 +12,7 @@ public class MainHUDGroup : GameHUDBase
     /// </summary>
     void Start()
     {
-        //showHUD();
+        showHUD();
     }
 
     /// <summary>
