@@ -12,7 +12,7 @@ public class MainHUDGroup : GameHUDBase
     /// </summary>
     void Start()
     {
-        showHUD();
+        //showHUD();
     }
 
     /// <summary>
@@ -31,6 +31,7 @@ public class MainHUDGroup : GameHUDBase
     public override void showHUD()
     {
         hudContentRoot.SetActive(true);
+        MouseCursorVisiblityManager.hideMouseCursor();
     }
 
     public override void updateHUDContent()

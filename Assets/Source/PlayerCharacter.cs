@@ -14,42 +14,43 @@ public class PlayerCharacter : MonoBehaviour
     private float rotationY = 0.0f;
 
 
-	// SCORE PROPERTIES
-	private int currentScore = 0;
-	private int highScore = 0;
+    // SCORE PROPERTIES
+    private int currentScore = 0;
+    private int highScore = 0;
 
 
 
     // EXTERNAL REFRENCES
     private OrderManager orderManagerRef;
+    private GameManager gameManagerRef;
 
-	/*--GETTERS AND SETTERS--*/
+    /*--GETTERS AND SETTERS--*/
 
-	// Get and set the current score
-	public int getCurrentScore()
-	{
-		return currentScore;
-	}
+    // Get and set the current score
+    public int getCurrentScore()
+    {
+        return currentScore;
+    }
 
-	public void setCurrentScore(int currentScore)
-	{
-		this.currentScore = currentScore;
-		print("Current Score:" + getCurrentScore());
-	}
+    public void setCurrentScore(int currentScore)
+    {
+        this.currentScore = currentScore;
+        print("Current Score:" + getCurrentScore());
+    }
 
 
-	// Get and set the high score
-	public int getHighScore()
-	{
-		return highScore;
-	}
+    // Get and set the high score
+    public int getHighScore()
+    {
+        return highScore;
+    }
 
-	public void setHighScore(int highScore)
-	{
-		this.highScore = highScore;
-	}
+    public void setHighScore(int highScore)
+    {
+        this.highScore = highScore;
+    }
 
-	/*--END OF GETTERS AND SETTERS--*/
+    /*--END OF GETTERS AND SETTERS--*/
 
 
     /// <summary>
@@ -57,13 +58,14 @@ public class PlayerCharacter : MonoBehaviour
     /// </summary>
     void Awake()
     {
-		orderManagerRef = FindObjectOfType<OrderManager>();
+        orderManagerRef = FindObjectOfType<OrderManager>();
+        gameManagerRef = FindObjectOfType<GameManager>();
     }
 
     // Use this for initialization
     void Start()
     {
-        MouseCursorVisiblityManager.hideMouseCursor();
+        
     }
 
     // Update is called once per frame
@@ -91,63 +93,72 @@ public class PlayerCharacter : MonoBehaviour
     // Control look
     private void controlLook()
     {
-        // Add to the rotation x and y values
-        rotationX += Input.GetAxis("Mouse X") * lookSensitivity * Time.deltaTime;
-        rotationY += -Input.GetAxis("Mouse Y") * lookSensitivity * Time.deltaTime;
+        // If the current game state is active
+        if (GameStateCheckers.isGameActive(gameManagerRef.getCurrentGameState()))
+        {
+            // Add to the rotation x and y values
+            rotationX += Input.GetAxis("Mouse X") * lookSensitivity * Time.deltaTime;
+            rotationY += -Input.GetAxis("Mouse Y") * lookSensitivity * Time.deltaTime;
 
-        // Clamp the rotation values
-        rotationX = Mathf.Clamp(rotationX, -90, 90);
-        rotationY = Mathf.Clamp(rotationY, -90, 90);
+            // Clamp the rotation values
+            rotationX = Mathf.Clamp(rotationX, -90, 90);
+            rotationY = Mathf.Clamp(rotationY, -90, 90);
 
-        // Set the rotation of the player
-        transform.eulerAngles = new Vector3(rotationY, rotationX, 0.0f);
+            // Set the rotation of the player
+            transform.eulerAngles = new Vector3(rotationY, rotationX, 0.0f);
+
+        }
     }
 
     // Control object interaction
     private void controlObjectInteraction()
     {
-        // The hit result of the ray cast
-        RaycastHit rayCastHitResult;
-
-        // Fire a ray cast
-        bool wasRayCastHit = Physics.Raycast(transform.position, transform.forward, out rayCastHitResult, Mathf.Infinity);
-
-        // If the left mouse button is pressed
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        // If the current game state is active
+        if (GameStateCheckers.isGameActive(gameManagerRef.getCurrentGameState()))
         {
-            // If the raycast hit something
-            if (wasRayCastHit)
+            // The hit result of the ray cast
+            RaycastHit rayCastHitResult;
+
+            // Fire a ray cast
+            bool wasRayCastHit = Physics.Raycast(transform.position, transform.forward, out rayCastHitResult, Mathf.Infinity);
+
+            // If the left mouse button is pressed
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                // If the object hit was a dispenser
-                if (rayCastHitResult.collider.CompareTag("Dispenser"))
+                // If the raycast hit something
+                if (wasRayCastHit)
                 {
-                    Dispenser hitDispenser = rayCastHitResult.collider.GetComponent<Dispenser>();
+                    // If the object hit was a dispenser
+                    if (rayCastHitResult.collider.CompareTag("Dispenser"))
+                    {
+                        Dispenser hitDispenser = rayCastHitResult.collider.GetComponent<Dispenser>();
 
-                    // Tell the hit dispenser to dispenser their ingredient
-                    hitDispenser.dispenseIngredient();
-                }
+                        // Tell the hit dispenser to dispenser their ingredient
+                        hitDispenser.dispenseIngredient();
+                    }
 
-                // If the object hit was the order check button
-                else if (rayCastHitResult.collider.CompareTag("OrderCheckButton"))
-                {
-                    OrderCheckButton hitOrderCheckButton = rayCastHitResult.collider.GetComponent<OrderCheckButton>();
+                    // If the object hit was the order check button
+                    else if (rayCastHitResult.collider.CompareTag("OrderCheckButton"))
+                    {
+                        OrderCheckButton hitOrderCheckButton = rayCastHitResult.collider.GetComponent<OrderCheckButton>();
 
-                    // Complete the current order
-					orderManagerRef.completeCurrentOrder();
+                        // Complete the current order
+                        orderManagerRef.completeCurrentOrder();
+                    }
                 }
             }
         }
     }
 
-	// Increase the current score
-	public void increaseCurrentScore(int increaseAmount)
-	{
-		setCurrentScore(getCurrentScore() + increaseAmount);
-	}	
+    // Increase the current score
+    public void increaseCurrentScore(int increaseAmount)
+    {
+        setCurrentScore(getCurrentScore() + increaseAmount);
+    }
 
-	// Decrease the current score
-	public void decreaseCurrentScore(int decreaseAmount)
-	{
-		setCurrentScore(getCurrentScore() - decreaseAmount);
-	}
+    // Decrease the current score
+    public void decreaseCurrentScore(int decreaseAmount)
+    {
+        setCurrentScore(getCurrentScore() - decreaseAmount);
+    }
 }

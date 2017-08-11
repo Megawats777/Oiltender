@@ -9,7 +9,7 @@ public class GameOverHUDGroup : GameHUDBase
     // Use this for initialization
     void Start()
     {
-		hideHUD();
+		//hideHUD();
     }
 
     // Update is called once per frame
@@ -26,6 +26,7 @@ public class GameOverHUDGroup : GameHUDBase
     public override void showHUD()
     {
         hudContentRoot.SetActive(true);
+		MouseCursorVisiblityManager.hideMouseCursor();
     }
 
     public override void updateHUDContent()

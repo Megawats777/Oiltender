@@ -8,7 +8,7 @@ public class PauseHUDGroup : GameHUDBase
     // Use this for initialization
     void Start()
     {
-		hideHUD();
+		//hideHUD();
     }
 
     // Update is called once per frame
@@ -25,6 +25,7 @@ public class PauseHUDGroup : GameHUDBase
     public override void showHUD()
     {
         hudContentRoot.SetActive(true);
+		MouseCursorVisiblityManager.showMouseCursor();
     }
 
     public override void updateHUDContent()

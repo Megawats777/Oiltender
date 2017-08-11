@@ -133,6 +133,48 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ae37c18441290ee4d98e50508645baf1, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &480542382
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4793995550208562, guid: f76e5db5972f2024c9a308b3e1830fbc, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 558.5034
+      objectReference: {fileID: 0}
+    - target: {fileID: 4793995550208562, guid: f76e5db5972f2024c9a308b3e1830fbc, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 445.66632
+      objectReference: {fileID: 0}
+    - target: {fileID: 4793995550208562, guid: f76e5db5972f2024c9a308b3e1830fbc, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4793995550208562, guid: f76e5db5972f2024c9a308b3e1830fbc, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4793995550208562, guid: f76e5db5972f2024c9a308b3e1830fbc, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4793995550208562, guid: f76e5db5972f2024c9a308b3e1830fbc, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4793995550208562, guid: f76e5db5972f2024c9a308b3e1830fbc, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4793995550208562, guid: f76e5db5972f2024c9a308b3e1830fbc, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: f76e5db5972f2024c9a308b3e1830fbc, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &483013842
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,6 +885,10 @@ Prefab:
     - target: {fileID: 224779261797672528, guid: 84b45bca82c216e4c9ec50eda15c6bd5,
         type: 2}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755055354618766, guid: 84b45bca82c216e4c9ec50eda15c6bd5, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
