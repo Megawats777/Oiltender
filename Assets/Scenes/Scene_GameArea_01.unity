@@ -816,7 +816,17 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 610977934}
+    - target: {fileID: 114655627620147198, guid: 84b45bca82c216e4c9ec50eda15c6bd5,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 610977934}
     - target: {fileID: 114761016369481156, guid: 84b45bca82c216e4c9ec50eda15c6bd5,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 610977934}
+    - target: {fileID: 114882493964148922, guid: 84b45bca82c216e4c9ec50eda15c6bd5,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

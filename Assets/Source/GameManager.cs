@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour
         // If the current game state is finished
         else if (getCurrentGameState() == PossibleGameStates.Finished)
         {
-            // If the Game Over is visible
+            // If the Game Over HUD is visible
             // Hide it
             if (gameOverHUD.getIsHUDVisible() == true)
             {
@@ -156,7 +156,29 @@ public class GameManager : MonoBehaviour
     // Quit the game
     public void quitGame()
     {
-        
-    }
+        // If the current game state is paused
+        if (getCurrentGameState() == PossibleGameStates.Paused)
+        {
+            // If the Pause HUD is visible
+            // Hide it
+            if (pauseHUD.getIsHUDVisible() == true)
+            {
+                pauseHUD.hideHUD();
+            }
+        }
 
+        // If the current game state is finished
+        else if (getCurrentGameState() == PossibleGameStates.Finished)
+        {
+            // If the Game Over HUD is visible
+            // Hide it
+            if (gameOverHUD.getIsHUDVisible() == true)
+            {
+                gameOverHUD.hideHUD();
+            }
+        }
+
+        // Load the main menu level
+        levelTransitionManagerRef.loadLevel("Scene_MainMenu_01");
+    }
 }
