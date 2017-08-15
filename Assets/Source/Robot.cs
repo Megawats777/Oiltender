@@ -6,7 +6,7 @@ public class Robot : MonoBehaviour
 {
 
 	// The health of the robot
-	private int health = 10;
+	private int health = 3;
 
 
 	// The default delay before the robot starts losing health

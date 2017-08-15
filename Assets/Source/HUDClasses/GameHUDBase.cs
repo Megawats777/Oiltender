@@ -5,6 +5,9 @@ using UnityEngine;
 
 public abstract class GameHUDBase : MonoBehaviour
 {
+    // Is the HUD visible
+    private bool isHUDVisible = true;
+
     //<Summary>
     // The root of all HUD content
     //</Summary>
@@ -19,4 +22,21 @@ public abstract class GameHUDBase : MonoBehaviour
 
     // Update the content of the HUD
     public abstract void updateHUDContent();
+
+    
+    /*--GETTERS AND SETTERS--*/
+
+    // Get and set is the HUD visible value
+    public bool getIsHUDVisible()
+    {
+        return isHUDVisible;
+    }
+
+    public void setIsHUDVisible(bool isHUDVisible)
+    {
+        this.isHUDVisible = isHUDVisible;
+    }
+
+    /*--END OF GETTERS AND SETTERS--*/
+
 }

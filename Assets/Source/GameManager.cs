@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
 	// The current game state
 	private PossibleGameStates currentGameState = PossibleGameStates.Starting;
+
+    // COMPONENT REFERENCES
+    private LevelTransitionManager levelTransitionManagerRef;
+
 
 	// EXTERNAL REFERENCES
 	private PlayerCharacter playerRef;
@@ -38,6 +43,9 @@ public class GameManager : MonoBehaviour
 	/// </summary>
 	void Awake()
 	{
+        levelTransitionManagerRef = GetComponent<LevelTransitionManager>();
+
+
 		startHUD = FindObjectOfType<StartHUDGroup>();
 		pauseHUD = FindObjectOfType<PauseHUDGroup>();
 		gameOverHUD = FindObjectOfType<GameOverHUDGroup>();
@@ -51,7 +59,7 @@ public class GameManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-		
+        Time.timeScale = 1.0f;
     }
 
     // Update is called once per frame
@@ -114,4 +122,41 @@ public class GameManager : MonoBehaviour
 		mainHUD.showHUD();
 		robotRef.startDrainingHealth(robotRef.getDefaultHealthLossDelay());
 	}
+
+    // Restart the game
+    public void restartGame()
+    {
+        // If the current game state is Paused
+        if (getCurrentGameState() == PossibleGameStates.Paused)
+        {
+            // If the Pause HUD is visible
+            // Hide it
+            if (pauseHUD.getIsHUDVisible() == true)
+            {
+                pauseHUD.hideHUD();
+            }
+
+        }
+
+        // If the current game state is finished
+        else if (getCurrentGameState() == PossibleGameStates.Finished)
+        {
+            // If the Game Over is visible
+            // Hide it
+            if (gameOverHUD.getIsHUDVisible() == true)
+            {
+                gameOverHUD.hideHUD();
+            }
+        }
+
+        // Load the current level again after a delay
+        StartCoroutine(levelTransitionManagerRef.loadLevelWithDelay(SceneManager.GetActiveScene().name, 2.0f));
+    }
+
+    // Quit the game
+    public void quitGame()
+    {
+        
+    }
+
 }
