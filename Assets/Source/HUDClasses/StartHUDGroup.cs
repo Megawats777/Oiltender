@@ -10,6 +10,8 @@ public class StartHUDGroup : GameHUDBase
     void Start()
     {
 		showHUD();
+        setIsHUDVisible(true);setIsHUDVisible(true);
+        print(GetType().ToString() + " " + getIsHUDVisible());
     }
 
     // Update is called once per frame

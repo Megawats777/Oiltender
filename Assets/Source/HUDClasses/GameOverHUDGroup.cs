@@ -30,7 +30,9 @@ public class GameOverHUDGroup : GameHUDBase
     // Use this for initialization
     void Start()
     {
-		//hideHUD();
+        setIsHUDVisible(false);
+
+        //hideHUD();
     }
 
     // Update is called once per frame

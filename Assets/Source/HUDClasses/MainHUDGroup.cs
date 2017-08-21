@@ -52,6 +52,8 @@ public class MainHUDGroup : GameHUDBase
     /// </summary>
     void Start()
     {
+        setIsHUDVisible(false);
+
         // Set the default font sizes for each of the order requirements HUD objects
         blueDiamondOrderTextDefaultFontSize = blueDiamondOrderText.fontSize;
         magicGrapeOrderTextDefaultFontSize = magicGrapeOrderText.fontSize;

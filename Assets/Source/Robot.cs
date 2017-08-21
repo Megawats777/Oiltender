@@ -56,7 +56,11 @@ public class Robot : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-		
+		// If in the editor set the health value to be 100
+        if (Application.isEditor == true)
+        {
+            setHealth(100);
+        }
     }
 
     // Update is called once per frame
