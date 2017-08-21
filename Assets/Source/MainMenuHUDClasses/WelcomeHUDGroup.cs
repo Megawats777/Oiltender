@@ -77,7 +77,6 @@ public class WelcomeHUDGroup : GameHUDBase
 
         // Launch game stage
         StartCoroutine(levelTransitionManagerRef.loadLevelWithDelay(gameStageLevelAddress, 2.0f));
-        print("Loading level");
     }
 
 }
