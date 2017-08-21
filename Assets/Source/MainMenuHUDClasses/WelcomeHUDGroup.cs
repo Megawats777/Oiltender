@@ -12,26 +12,35 @@ public class WelcomeHUDGroup : GameHUDBase
     private Text highScoreText;
     [SerializeField]
     private Button startButton;
+    [SerializeField]
+    private Button howToPlayButton;
+    [SerializeField]
+    private Button optionsButton;
 
     // Game stage level address
-    [SerializeField]
+    [Space(2), SerializeField]
     private string gameStageLevelAddress;
+
 
 
     // EXTERNAL REFERENCES
     private LevelTransitionManager levelTransitionManagerRef;
-
-
+    private HowToPlayHUDGroup howToPlayHUDRef;
+    private OptionsHUDGroup optionsHUDRef;
 
     // Called before start
     private void Awake()
     {
         levelTransitionManagerRef = FindObjectOfType<LevelTransitionManager>();
+
+        howToPlayHUDRef = FindObjectOfType<HowToPlayHUDGroup>();
+        optionsHUDRef = FindObjectOfType<OptionsHUDGroup>();
     }
 
     // Use this for initialization
     void Start()
     {
+        showHUD();
         setIsHUDVisible(true);
 
         // Update the content of the HUD
@@ -40,8 +49,10 @@ public class WelcomeHUDGroup : GameHUDBase
         // Show the mouse cursor
         MouseCursorVisiblityManager.showMouseCursor();
 
-        // Link the launch game event to the start button
+        // Link events to HUD buttons
         startButton.onClick.AddListener(delegate { launchGame(); });
+        howToPlayButton.onClick.AddListener(delegate { transitionToHowToPlayScreen(); });
+        optionsButton.onClick.AddListener(delegate { transitionToOptionsScreen();  });
     }
 
     // Update is called once per frame
@@ -77,6 +88,26 @@ public class WelcomeHUDGroup : GameHUDBase
 
         // Launch game stage
         StartCoroutine(levelTransitionManagerRef.loadLevelWithDelay(gameStageLevelAddress, 2.0f));
+    }
+
+    // Transition to the how to play screen
+    private void transitionToHowToPlayScreen()
+    {
+        // Hide this HUD
+        hideHUD();
+
+        // Show the how to play HUD
+        howToPlayHUDRef.showHUD();
+    }
+
+    // Transition to options screen
+    private void transitionToOptionsScreen()
+    {
+        // Hide this HUD
+        hideHUD();
+
+        // Show the options HUD
+        optionsHUDRef.showHUD();
     }
 
 }

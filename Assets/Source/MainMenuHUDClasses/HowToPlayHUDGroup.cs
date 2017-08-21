@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OptionsHUDGroup : GameHUDBase
+public class HowToPlayHUDGroup : GameHUDBase
 {
-    
+
     // Use this for initialization
     void Start()
     {
@@ -17,6 +17,7 @@ public class OptionsHUDGroup : GameHUDBase
     {
 
     }
+
 
     public override void hideHUD()
     {
