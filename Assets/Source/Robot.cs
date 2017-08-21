@@ -6,7 +6,7 @@ public class Robot : MonoBehaviour
 {
 
 	// The health of the robot
-	private int health = 3;
+	private int health = 10;
 
 
 	// The default delay before the robot starts losing health
@@ -56,8 +56,8 @@ public class Robot : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-		// If in the editor set the health value to be 100
-        if (Application.isEditor == true)
+		// If in not editor set the health value to be 100
+        if (Application.isEditor == false)
         {
             setHealth(100);
         }

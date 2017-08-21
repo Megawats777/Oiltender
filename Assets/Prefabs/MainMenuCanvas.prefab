@@ -88,6 +88,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224795645747551652}
+  - component: {fileID: 114470797288424074}
   m_Layer: 5
   m_Name: OptionsHUDGroup
   m_TagString: Untagged
@@ -103,6 +104,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224685657307342796}
+  - component: {fileID: 114482163236322382}
   m_Layer: 5
   m_Name: WelcomeHUDGroup
   m_TagString: Untagged
@@ -156,6 +158,8 @@ GameObject:
   - component: {fileID: 223890409121079312}
   - component: {fileID: 114823873123833278}
   - component: {fileID: 114302611529696644}
+  - component: {fileID: 114079030094824474}
+  - component: {fileID: 114465811932062606}
   m_Layer: 5
   m_Name: MainMenuCanvas
   m_TagString: Untagged
@@ -240,6 +244,17 @@ Transform:
   m_Father: {fileID: 224156197805513784}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114079030094824474
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1680439762712548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7182a3cdda75b40ab0d922b37d16b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114136611947073092
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -437,6 +452,44 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Quit
+--- !u!114 &114465811932062606
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1680439762712548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1f9151de29961749bcedf332ade1b14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114470797288424074
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1413248986930066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f1326999bcf56147926829dc77840a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hudContentRoot: {fileID: 0}
+--- !u!114 &114482163236322382
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1419763809161580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fee382abe48a054bbc6c291ed8d39ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hudContentRoot: {fileID: 1831726267195504}
+  highScoreText: {fileID: 114813992389733678}
+  startButton: {fileID: 114279188220092262}
+  gameStageLevelAddress: Scene_GameArea_01
 --- !u!114 &114515085664222484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -574,7 +627,29 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114515085664222484}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114482163236322382}
+        m_MethodName: hideHUD
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+      - m_Target: {fileID: 114079030094824474}
+        m_MethodName: quitApplication
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114958233540443112
@@ -823,7 +898,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 130, y: 60}
+  m_AnchoredPosition: {x: 130, y: 65}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224552036079845082
