@@ -36,15 +36,11 @@ public class OptionsHUDGroup : GameHUDBase
         hudContentRoot.SetActive(false);
         setIsHUDVisible(false);
 
-        // Set the value of the sliders to be the same as the saved options data
-        mouseSensitivitySlider.value = SaveGameManager.getSavedMouseSensitivity();
-
-        // Show the values of the sliders on their respective labels
-        mouseSensitivityValueText.text = Math.Round(mouseSensitivitySlider.value, 2).ToString();
+        // Update options control elements
+        updateOptionsControlElements();
 
         // Bind functions to HUD objects
-        backButton.onClick.AddListener(delegate { transitionToWelcomeScreen(); });
-        mouseSensitivitySlider.onValueChanged.AddListener(delegate { updateSliderValueText(mouseSensitivityValueText, mouseSensitivitySlider.value); });
+        bindFunctionsToHUDObjects();
     }
 
     // Update is called once per frame
@@ -63,6 +59,12 @@ public class OptionsHUDGroup : GameHUDBase
     {
         setIsHUDVisible(true);
         hudContentRoot.SetActive(true);
+
+        // Update options control elements
+        updateOptionsControlElements();
+
+        // Bind functions to HUD objects
+        bindFunctionsToHUDObjects();
     }
 
     public override void updateHUDContent()
@@ -76,12 +78,37 @@ public class OptionsHUDGroup : GameHUDBase
         textToUpdate.text = Math.Round(value, 2).ToString();
     }
 
+    // Update options control elements
+    private void updateOptionsControlElements()
+    {
+        // Set the value of the motion blur toggle to be the same as the saved options data
+        motionBlurToggle.isOn = SaveGameManager.getSavedMotionBlurToggle();
+
+        // Set the value of the sliders to be the same as the saved options data
+        mouseSensitivitySlider.value = SaveGameManager.getSavedMouseSensitivity();
+
+        // Show the values of the sliders on their respective labels
+        mouseSensitivityValueText.text = Math.Round(mouseSensitivitySlider.value, 2).ToString();
+    }
+
+    // Bind functions to HUD objects
+    private void bindFunctionsToHUDObjects()
+    {
+        backButton.onClick.AddListener(delegate { transitionToWelcomeScreen(); });
+        mouseSensitivitySlider.onValueChanged.AddListener(delegate { updateSliderValueText(mouseSensitivityValueText, mouseSensitivitySlider.value); });
+    }
+
+
     // Transition to welcome screen
     private void transitionToWelcomeScreen()
     {
         print(mouseSensitivitySlider.value);
-        // Set the saved data
+        
+        // Set the saved data values
         SaveGameManager.setSavedMouseSensitivity(mouseSensitivitySlider.value);
+        SaveGameManager.setSavedMotionBlurToggle(motionBlurToggle.isOn);
+
+        print(SaveGameManager.getSavedMouseSensitivity());
 
         // Hide this HUD
         hideHUD();

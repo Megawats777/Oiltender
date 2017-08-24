@@ -11,6 +11,11 @@ public class SaveGameManager : MonoBehaviour
     // Application save data directory
     private static string saveDataDirectory = Application.persistentDataPath;
 
+    // The motion blur toggle save file name
+    private static string motionBlurToggleSaveFileName = "MOTIONBLURTOGGLE.SAVE";
+
+    // The mouse sensitivity value save file name
+    private static string mouseSensitivityValueSaveFileName = "MOUSESENSITIVITYVALUE.SAVE";
 
     /*--PLAYER DATA SAVE FUNCTIONS--*/
 
@@ -72,7 +77,9 @@ public class SaveGameManager : MonoBehaviour
 
 
 
-    /*--OPTIONS DATA SAVE FUNCTIONS--*/
+    /*---OPTIONS DATA SAVE FUNCTIONS---*/
+
+    /*-Get and Set saved mouse sensitivity-*/
 
     // Get the saved mouse sensitivity
     public static float getSavedMouseSensitivity()
@@ -80,10 +87,10 @@ public class SaveGameManager : MonoBehaviour
         BinaryFormatter fileReader = new BinaryFormatter();
 
         // If the save file exists
-        if (File.Exists(saveDataDirectory + "/" + "OPTIONSDATA.SAVE"))
+        if (File.Exists(saveDataDirectory + "/" + motionBlurToggleSaveFileName))
         {
             // Open the file
-            FileStream fileStream = new FileStream(saveDataDirectory + "/" + "OPTIONSDATA.SAVE", FileMode.Open);
+            FileStream fileStream = new FileStream(saveDataDirectory + "/" + mouseSensitivityValueSaveFileName, FileMode.Open);
 
             // Deserialize the file
             OptionsData optionsDataRef = (OptionsData)fileReader.Deserialize(fileStream);
@@ -102,7 +109,7 @@ public class SaveGameManager : MonoBehaviour
         else
         {
             print("Could not get options data (Mouse Sensitivity) file");
-            return 20.0f;
+            return 1.5f;
         }
     }
 
@@ -111,13 +118,13 @@ public class SaveGameManager : MonoBehaviour
     {
         BinaryFormatter fileWriter = new BinaryFormatter();
 
-        // Create and instance of the options data class
+        // Create an instance of the options data class
         OptionsData optionsDataRef = new OptionsData();
 
         // Create the save file
-        FileStream fileStream = new FileStream(saveDataDirectory + "/" + "OPTIONSDATA.SAVE", FileMode.Create);
+        FileStream fileStream = new FileStream(saveDataDirectory + "/" + mouseSensitivityValueSaveFileName, FileMode.Create);
 
-        // Set the saved mouse sensitivity to the options data instance
+        // Set the saved mouse sensitivity to the one set the the newMouseSensitivity parameter
         optionsDataRef.savedMouseSensitivity = newMouseSensitivity;
 
         // Serialize the options data class
@@ -127,7 +134,70 @@ public class SaveGameManager : MonoBehaviour
         fileStream.Close();
     }
 
-    /*--END OF OPTIONS DATA SAVE FUNCTIONS--*/
+    // Reset the saved mouse sensitivity
+    public static void resetSavedMouseSensitivity()
+    {
+        setSavedMouseSensitivity(0.0f);
+    }
+
+
+    /*-Get and set saved motion blur toggle-*/
+
+    // Get the saved motion blur toggle
+    public static bool getSavedMotionBlurToggle()
+    {
+        BinaryFormatter fileReader = new BinaryFormatter();
+
+        // If the save file exists
+        if (File.Exists(saveDataDirectory + "/" + motionBlurToggleSaveFileName))
+        {
+            // Open the file
+            FileStream fileStream = new FileStream(saveDataDirectory + "/" + motionBlurToggleSaveFileName, FileMode.Open);
+
+            // Deserialize the file 
+            OptionsData optionsDataRef = (OptionsData)fileReader.Deserialize(fileStream);
+
+            // Get the saved motion blur toggle
+            bool fileMotionBlurToggle = optionsDataRef.savedMotionBlurToggle;
+
+            // Stop reading the file
+            fileStream.Close();
+
+            // Return the saved motion blur toggle
+            return fileMotionBlurToggle;
+        }
+
+        // Otherwise
+        else
+        {
+            print("Could not get options data (motion blur toggle) file");
+            return true;
+        }
+    }
+
+    // Set the saved motion blur toggle
+    public static void setSavedMotionBlurToggle(bool newStatus)
+    {
+        BinaryFormatter fileWriter = new BinaryFormatter();
+
+        // Create an instance of the options data class
+        OptionsData optionsDataRef = new OptionsData();
+
+        // Create the save file
+        FileStream fileStream = new FileStream(saveDataDirectory + "/" + motionBlurToggleSaveFileName, FileMode.Create);
+
+        // Set the saved motion blur toggle to the one set by the new status parameter
+        optionsDataRef.savedMotionBlurToggle = newStatus;
+
+        // Serialize the options data class
+        fileWriter.Serialize(fileStream, optionsDataRef);
+
+        // Stop writing to the save file
+        fileStream.Close();
+    }
+
+
+    /*---END OF OPTIONS DATA SAVE FUNCTIONS---*/
 }
 
 // Acts as a container for the player's data

@@ -6,6 +6,7 @@ public class PlayerCharacter : MonoBehaviour
 {
 
     // The look sensitivity
+    [SerializeField]
     private float lookSensitivity = 1.5f;
 
     // The current rotation x and y values
@@ -68,8 +69,10 @@ public class PlayerCharacter : MonoBehaviour
         setHighScore(SaveGameManager.getSavedHighScore());
 
         // Set the look sensitivity to be the same as the saved mouse sensitivity
-        print(lookSensitivity);
         lookSensitivity = SaveGameManager.getSavedMouseSensitivity();
+        print(lookSensitivity);
+
+        print("Motion Blur On: " + SaveGameManager.getSavedMotionBlurToggle());
     }
 
     // Update is called once per frame
