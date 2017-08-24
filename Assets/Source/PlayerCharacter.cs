@@ -73,6 +73,10 @@ public class PlayerCharacter : MonoBehaviour
         print(lookSensitivity);
 
         print("Motion Blur On: " + SaveGameManager.getSavedMotionBlurToggle());
+
+        // Set the volume of the audio listener based on the save data
+        AudioListener.volume = SaveGameManager.getSavedAudioVolumeValue();
+        print("Volume: " + AudioListener.volume);
     }
 
     // Update is called once per frame

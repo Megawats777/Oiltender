@@ -17,6 +17,9 @@ public class SaveGameManager : MonoBehaviour
     // The mouse sensitivity value save file name
     private static string mouseSensitivityValueSaveFileName = "MOUSESENSITIVITYVALUE.SAVE";
 
+    // The audio volume value save file name
+    private static string audioVolumeValueSaveFileName = "AUDIOVOLUMEVALUE.SAVE";
+
     /*--PLAYER DATA SAVE FUNCTIONS--*/
 
 
@@ -137,11 +140,11 @@ public class SaveGameManager : MonoBehaviour
     // Reset the saved mouse sensitivity
     public static void resetSavedMouseSensitivity()
     {
-        setSavedMouseSensitivity(0.0f);
+        setSavedMouseSensitivity(2.0f);
     }
 
 
-    /*-Get and set saved motion blur toggle-*/
+    /*-Get and Set saved motion blur toggle-*/
 
     // Get the saved motion blur toggle
     public static bool getSavedMotionBlurToggle()
@@ -196,6 +199,67 @@ public class SaveGameManager : MonoBehaviour
         fileStream.Close();
     }
 
+
+    /*-Get and Set audio volume value-*/
+
+    // Get the saved audio volume value
+    public static float getSavedAudioVolumeValue()
+    {
+        BinaryFormatter fileReader = new BinaryFormatter();
+
+        // If the file exists
+        if (File.Exists(saveDataDirectory + "/" + audioVolumeValueSaveFileName))
+        {
+            // Open the file
+            FileStream fileStream = new FileStream(saveDataDirectory + "/" + audioVolumeValueSaveFileName, FileMode.Open);
+
+            // Deserialize the file
+            OptionsData optionsDataRef = (OptionsData)fileReader.Deserialize(fileStream);
+
+            // Get the saved audio volume value
+            float fileAudioVolumeValue = optionsDataRef.savedAudioVolumeValue;
+
+            // Stop reading the file
+            fileStream.Close();
+
+            // Return the saved audio volume value
+            return fileAudioVolumeValue;
+        }
+
+        // Otherwise
+        else
+        {
+            print("Could not get options data (Audio Volume) file");
+            return 1;
+        }
+    }
+
+    // Set the saved audio volume value
+    public static void setSavedAudioVolumeValue(float newValue)
+    {
+        BinaryFormatter fileWriter = new BinaryFormatter();
+
+        // Create an instance of the options data class
+        OptionsData optionsDataRef = new OptionsData();
+
+        // Create the save file
+        FileStream fileStream = new FileStream(saveDataDirectory + "/" + audioVolumeValueSaveFileName, FileMode.Create);
+
+        // Set the saved audio volume value to the one set the by the new value parameter
+        optionsDataRef.savedAudioVolumeValue = newValue;
+
+        // Serialize the opttions data class
+        fileWriter.Serialize(fileStream, optionsDataRef);
+
+        // Stop writing to the save file
+        fileStream.Close();
+    }
+
+    // Reset the saved audio volume value
+    public static void resetSavedAudioVolumeValue()
+    {
+        setSavedAudioVolumeValue(1.0f);
+    }
 
     /*---END OF OPTIONS DATA SAVE FUNCTIONS---*/
 }
