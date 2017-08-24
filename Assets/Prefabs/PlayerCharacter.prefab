@@ -74,6 +74,8 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
+  m_AllowMSAA: 1
+  m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -103,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de65c1b0e7cecff4f8c7e1df26ac21df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookSensitivity: 100
+  lookSensitivity: 1.5
 --- !u!124 &124338128325477962
 Behaviour:
   m_ObjectHideFlags: 1

@@ -6,8 +6,7 @@ public class PlayerCharacter : MonoBehaviour
 {
 
     // The look sensitivity
-    [SerializeField]
-    private float lookSensitivity = 20.0f;
+    private float lookSensitivity = 1.5f;
 
     // The current rotation x and y values
     private float rotationX = 0.0f;
@@ -67,6 +66,8 @@ public class PlayerCharacter : MonoBehaviour
     {
         // Set the high score
         setHighScore(SaveGameManager.getSavedHighScore());
+
+        print(lookSensitivity);
     }
 
     // Update is called once per frame
@@ -113,8 +114,8 @@ public class PlayerCharacter : MonoBehaviour
         if (GameStateCheckers.isGameActive(gameManagerRef.getCurrentGameState()) || GameStateCheckers.isGameStarting(gameManagerRef.getCurrentGameState()))
         {
             // Add to the rotation x and y values
-            rotationX += Input.GetAxis("Mouse X") * lookSensitivity * Time.deltaTime;
-            rotationY += -Input.GetAxis("Mouse Y") * lookSensitivity * Time.deltaTime;
+            rotationX += Input.GetAxis("Mouse X") * lookSensitivity;
+            rotationY += -Input.GetAxis("Mouse Y") * lookSensitivity;
 
             // Clamp the rotation values
             rotationX = Mathf.Clamp(rotationX, -90, 90);

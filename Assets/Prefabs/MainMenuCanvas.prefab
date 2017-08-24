@@ -2597,6 +2597,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hudContentRoot: {fileID: 1750974208705612}
+  mouseSensitivitySlider: {fileID: 114936349899455806}
+  mouseSensitivityValueText: {fileID: 114200250667370588}
+  motionBlurToggle: {fileID: 114449682760982628}
+  audioVolumeSlider: {fileID: 114777949808396292}
+  audioVolumeValueText: {fileID: 114118002124111410}
+  backButton: {fileID: 114709566986310746}
 --- !u!114 &114474847604805620
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3405,7 +3411,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: '- Mouse Sensitivity'
+  m_Text: '- Sound Volume'
 --- !u!114 &114915130959956514
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3472,10 +3478,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 224872768724440486}
   m_HandleRect: {fileID: 224060419109645748}
   m_Direction: 0
-  m_MinValue: 1
-  m_MaxValue: 100
+  m_MinValue: 0.01
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 20
+  m_Value: 0.15
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
