@@ -33,13 +33,14 @@ public class OptionsHUDGroup : GameHUDBase
     // Use this for initialization
     void Start()
     {
+        hudContentRoot.SetActive(false);
         setIsHUDVisible(false);
 
         // Set the value of the sliders to be the same as the saved options data
-
+        mouseSensitivitySlider.value = SaveGameManager.getSavedMouseSensitivity();
 
         // Show the values of the sliders on their respective labels
-        mouseSensitivityValueText.text = Math.Round(mouseSensitivitySlider.value, 1).ToString();
+        mouseSensitivityValueText.text = Math.Round(mouseSensitivitySlider.value, 2).ToString();
 
         // Bind functions to HUD objects
         backButton.onClick.AddListener(delegate { transitionToWelcomeScreen(); });
@@ -72,7 +73,7 @@ public class OptionsHUDGroup : GameHUDBase
     // Update slider value text
     private void updateSliderValueText(Text textToUpdate, float value)
     {
-        textToUpdate.text = Math.Round(value, 1).ToString();
+        textToUpdate.text = Math.Round(value, 2).ToString();
     }
 
     // Transition to welcome screen

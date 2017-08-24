@@ -67,7 +67,9 @@ public class PlayerCharacter : MonoBehaviour
         // Set the high score
         setHighScore(SaveGameManager.getSavedHighScore());
 
+        // Set the look sensitivity to be the same as the saved mouse sensitivity
         print(lookSensitivity);
+        lookSensitivity = SaveGameManager.getSavedMouseSensitivity();
     }
 
     // Update is called once per frame
