@@ -6,8 +6,12 @@ public class Robot : MonoBehaviour
 {
 
 	// The health of the robot
-	private int health = 10;
+    [SerializeField]
+	private int health = 20;
 
+    // The length of the robot's health decay intervals
+    [SerializeField]
+    private float healthDecayIntervalLength = 1.0f;
 
 	// The default delay before the robot starts losing health
 	[SerializeField]
@@ -56,11 +60,7 @@ public class Robot : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-		// If in not editor set the health value to be 100
-        if (Application.isEditor == false)
-        {
-            setHealth(100);
-        }
+		
     }
 
     // Update is called once per frame
@@ -87,7 +87,7 @@ public class Robot : MonoBehaviour
 	// Start draining the health of the robot
 	public void startDrainingHealth(float initialDelay)
 	{
-		InvokeRepeating("drainHealth", initialDelay, 1.0f);
+		InvokeRepeating("drainHealth", initialDelay, healthDecayIntervalLength);
 	}
 
 	// Stop draining the health of the robot

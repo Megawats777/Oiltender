@@ -17,8 +17,10 @@ public class PlayerCharacter : MonoBehaviour
     // SCORE PROPERTIES
     private int currentScore = 0;
     private int highScore = 10;
+    private int scoreMultiplier = 1;
 
-
+    [SerializeField]
+    private int maxScoreMultiplierSize = 10;
 
     // EXTERNAL REFRENCES
     private OrderManager orderManagerRef;
@@ -48,6 +50,18 @@ public class PlayerCharacter : MonoBehaviour
     public void setHighScore(int highScore)
     {
         this.highScore = highScore;
+    }
+
+
+    // Get and set the score multiplier
+    public int getScoreMultiplier()
+    {
+        return scoreMultiplier;
+    }
+
+    public void setScoreMultiplier(int scoreMultiplier)
+    {
+        this.scoreMultiplier = (int)Mathf.Clamp(scoreMultiplier, 1, maxScoreMultiplierSize);
     }
 
     /*--END OF GETTERS AND SETTERS--*/
@@ -94,16 +108,20 @@ public class PlayerCharacter : MonoBehaviour
         // Control game starting
         controlGameStarting();
 
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Application.isEditor)
         {
-            if (Cursor.visible)
+            if (Input.GetKeyDown(KeyCode.T))
             {
-                MouseCursorVisiblityManager.hideMouseCursor();
+                if (Cursor.visible)
+                {
+                    MouseCursorVisiblityManager.hideMouseCursor();
+                }
+                else
+                {
+                    MouseCursorVisiblityManager.showMouseCursor();
+                }
             }
-            else
-            {
-                MouseCursorVisiblityManager.showMouseCursor();
-            }
+
         }
 
         if (Application.isEditor)
@@ -228,6 +246,18 @@ public class PlayerCharacter : MonoBehaviour
     public void decreaseCurrentScore(int decreaseAmount)
     {
         setCurrentScore(getCurrentScore() - decreaseAmount);
+    }
+
+    // Increase the score multiplier
+    public void increaseScoreMultiplier(int increaseAmount)
+    {
+        setScoreMultiplier(getScoreMultiplier() + increaseAmount);
+    }
+
+    // Reset the score multiplier
+    public void resetScoreMultiplier()
+    {
+        setScoreMultiplier(1);
     }
 
     // Set the new high score

@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimumRequiredIngredientAmount: 0
-  maximumRequiredIngredientAmount: 10
+  maximumRequiredIngredientAmount: 5
   orderScoreValue: 10
-  orderHealthValue: 10
+  orderHealthValue: 2
+  delayBetweenOrders: 0.2

@@ -179,23 +179,40 @@ public class OrderManager : MonoBehaviour
         if (getDispensedBlueDiamond() == getRequiredBlueDiamond() && getDispensedMagicGrape() == getRequiredMagicGrape()
             && getDispensedRedSugar() == getRequiredRedSugar())
         {
+            // Multiply the order score value by the score multiplier
+            int modifiedOrderScoreValue = orderScoreValue * playerRef.getScoreMultiplier();
+            print("Moded score value: " + modifiedOrderScoreValue);
+
             // Add to the player's score
-			// Increase the health of the robot
+            playerRef.increaseCurrentScore(modifiedOrderScoreValue);
+
+            // Increase the multiplier size
+            playerRef.increaseScoreMultiplier(1);
+
             // Generate a new order with a delay
-            playerRef.increaseCurrentScore(orderScoreValue);
-			robotRef.increaseHealth(orderHealthValue);
             StartCoroutine(generateOrderWithDelay());
-            //print("Order Successful");
+
+            // Increase the robot's health
+            robotRef.increaseHealth(orderHealthValue);
         }
 
         // Otherwise reduce the player's score
         else
         {
+            // Multiply the order score value by the score multiplier
+            int modifiedOrderScoreValue = orderScoreValue * playerRef.getScoreMultiplier();
+            print("Moded score value: " + modifiedOrderScoreValue);
+
             // Decrease the player's score
+            playerRef.decreaseCurrentScore(modifiedOrderScoreValue);
+
+            // Reset the score multiplier to 1
+            playerRef.resetScoreMultiplier();
+            
             // Generate a new order with a delay
             playerRef.decreaseCurrentScore(orderScoreValue);
             StartCoroutine(generateOrderWithDelay());
-            //print("Order Failed");
+            
         }
     }
 

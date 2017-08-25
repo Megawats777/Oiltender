@@ -13,6 +13,8 @@ public class MainHUDGroup : GameHUDBase
     private Text highScoreText;
     [SerializeField]
     private Text robotHealthText;
+    [SerializeField]
+    private Text scoreMultiplierText;
 
     // ORDER REQUIREMENTS HUD OBJECTS
     [Header("Order Requirements HUD Objects"), SerializeField]
@@ -53,6 +55,7 @@ public class MainHUDGroup : GameHUDBase
     void Start()
     {
         setIsHUDVisible(false);
+        hudContentRoot.SetActive(false);
 
         // Set the default font sizes for each of the order requirements HUD objects
         blueDiamondOrderTextDefaultFontSize = blueDiamondOrderText.fontSize;
@@ -83,10 +86,11 @@ public class MainHUDGroup : GameHUDBase
 
     public override void updateHUDContent()
     {
-        // Set the content for the current score, high score, and robot health text objects
+        // Set the content for the current score, high score, score multiplier,and robot health text objects
         currentScoreText.text = playerRef.getCurrentScore().ToString();
         highScoreText.text = playerRef.getHighScore().ToString();
         robotHealthText.text = robotRef.getHealth().ToString();
+        scoreMultiplierText.text = "x" + playerRef.getScoreMultiplier().ToString();
 
         // Set the content for the order requirements text objects
         // If a new order is being generated
