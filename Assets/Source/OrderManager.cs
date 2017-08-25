@@ -147,7 +147,6 @@ public class OrderManager : MonoBehaviour
 
     }
 
-
     // Increase the number of an ingredient dispensed
     public void increaseIngredientDispensed(IngredientTypes dispensedIngredient, int increaseAmount)
     {
